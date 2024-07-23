@@ -1,2 +1,2 @@
-# uvg2024ppm20
-Repositorio de Ejemplos para el curso de programación de plataformas móviles 2024
+# PROGRAMACIÓN PLATAFORMAS MÓVILES 2024
+En este repositorio encontrarás los ejemplos que utilizaremos en el curso, cada unidad estará separada en carpetas en donde podrás buscar el ejemplo que necesites.
