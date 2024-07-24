@@ -19,6 +19,17 @@ object Agenda {
         contactos.add(contacto)
     }
 
+    fun buscarContacto(nombre: String, apellido: String): Contacto? {
+        for (contact in contactos){
+            if (contact.nombre.uppercase().equals(nombre.uppercase())
+                && contact.apellido.uppercase().equals(apellido.uppercase())) {
+                return contact
+            }
+        }
+
+        return null
+    }
+
     fun agregarEvento(evento: Evento) {
         eventos.add(evento)
     }
@@ -29,6 +40,10 @@ object Agenda {
 
     fun mostrarEventos() {
         eventos.forEach { println(it.titulo) }
+    }
+
+    fun obtenerEvento(index: Int): Evento{
+        return eventos.get(index)
     }
 
 }

@@ -15,17 +15,27 @@ interface Notificable {
 /***
  * Ejemplo de clase que podra tener subclases, de acuerdo a la palabra open, implementa la interfaz notificable
  */
-open class Evento(val titulo: String, val fecha: String, val descripcion: String) : Notificable {
+open class Evento(val titulo: String, val fecha: String, val descripcion: String, val tipo: TipoEvento) : Notificable {
     override fun notificar() {
         println("Notificación del evento: $titulo")
     }
+
+    companion object {
+        const val DEFAULT_DESCRIPCION = "Sin descripción"
+    }
 }
+
 
 /***
  * Ejemplo de una subclase de la clase Evento, incluye sus propiedades y metodos
  */
-class EventoImportante(titulo: String, fecha: String, descripcion: String, val prioridad: Int) : Evento(titulo, fecha, descripcion)
+class EventoImportante(titulo: String, fecha: String, descripcion: String, tipo: TipoEvento, val prioridad: Int) : Evento(titulo, fecha, descripcion, tipo)
 
-
+/***
+ * Ejemplo de colecciones ENUM
+ */
+enum class TipoEvento {
+    REUNION, CUMPLEANOS, ANIVERSARIO, OTRO
+}
 
 
