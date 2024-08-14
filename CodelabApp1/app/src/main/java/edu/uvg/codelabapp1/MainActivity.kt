@@ -1,5 +1,6 @@
 package edu.uvg.codelabapp1
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -31,6 +32,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.coerceAtLeast
 import edu.uvg.codelabapp1.ui.theme.CodelabApp1Theme
 
@@ -145,7 +147,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello ")
-                Text(text = name)
+                Text(
+                    text = name
+                    , style = MaterialTheme.typography.headlineMedium.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                )
             }
             ElevatedButton(
                 onClick = { expanded = !expanded }
@@ -157,7 +164,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 }
 
-@Preview(showBackground = true, widthDp = 320)
+@Preview(
+    showBackground = true
+    , widthDp = 320
+    , uiMode = Configuration.UI_MODE_NIGHT_YES
+    , name = "GreetingPreviewDark"
+)
 @Composable
 fun GreetingPreview() {
     CodelabApp1Theme {
