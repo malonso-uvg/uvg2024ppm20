@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue //Add this, if not by rememember wont work
 import androidx.compose.runtime.setValue //Add this, if not by rememember wont work
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,7 +47,6 @@ fun OnboardingScreen(
     onContinueClicked: () -> Unit
     , modifier: Modifier = Modifier
 ){
-    var shouldShowOnboardging by remember { mutableStateOf(true) }
 
     Column (
         modifier = modifier.fillMaxSize()
@@ -77,7 +77,7 @@ fun MyApp(
         modifier: Modifier = Modifier
     ){
 
-    var shouldShowOnboarding by remember { mutableStateOf(true) }
+    var shouldShowOnboarding by rememberSaveable { mutableStateOf(true) }
 
     Surface (modifier) {
         if (shouldShowOnboarding){
@@ -121,7 +121,7 @@ fun GreetingsPreview(){
 fun Greeting(name: String, modifier: Modifier = Modifier) {
 
     //State variable
-    var expanded by remember { mutableStateOf(false) }
+    var expanded by rememberSaveable { mutableStateOf(false) }
 
     val extraPadding = if (expanded) 48.dp else 0.dp
 
