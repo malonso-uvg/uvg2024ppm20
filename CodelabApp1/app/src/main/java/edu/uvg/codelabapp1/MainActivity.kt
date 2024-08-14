@@ -28,6 +28,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.ui.unit.coerceAtLeast
 import edu.uvg.codelabapp1.ui.theme.CodelabApp1Theme
 
 class MainActivity : ComponentActivity() {
@@ -123,7 +127,13 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     //State variable
     var expanded by rememberSaveable { mutableStateOf(false) }
 
-    val extraPadding = if (expanded) 48.dp else 0.dp
+    val extraPadding by animateDpAsState(
+        if (expanded) 48.dp else 0.dp
+        , animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy
+            , stiffness = Spring.StiffnessLow
+        )
+    )
 
     Surface(
         color = MaterialTheme.colorScheme.primary,
@@ -132,7 +142,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         Row (modifier = Modifier.padding(24.dp)){
             Column (modifier = Modifier
                 .weight(1f)
-                .padding(bottom = extraPadding)
+                .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello ")
                 Text(text = name)
