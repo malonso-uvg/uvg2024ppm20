@@ -25,6 +25,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyColumn
 import edu.uvg.codelabapp1.ui.theme.CodelabApp1Theme
 
 class MainActivity : ComponentActivity() {
@@ -98,11 +100,11 @@ fun MyAppPreview(){
 @Composable
 private fun Greetings(
     modifier: Modifier = Modifier
-    , names: List<String> = listOf("World", "Compose")
+    , names: List<String> = List(1000){ "$it" }
 ){
-    Column (modifier = modifier.padding(vertical = 4.dp)){
-        for (name in names){
-            Greeting(name = name)
+    LazyColumn (modifier = modifier.padding(vertical = 4.dp)){
+        items(items = names){
+            name -> Greeting(name = name)
         }
     }
 }
