@@ -59,6 +59,50 @@ fun Calculator(
             CalculatorButton(onClickedValue = { title = title + "2" }, text = "2")
             CalculatorButton(onClickedValue = { title = title + "3" }, text = "3")
             CalculatorButton(onClickedValue = { title = title + "+" }, text = "+")
+            CalculatorButton(onClickedValue = { title = title + "-" }, text = "-")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+            , horizontalArrangement = Arrangement.Center
+            , modifier = modifier.fillMaxWidth()
+        ) {
+            CalculatorButton(onClickedValue = { title = title + "4" }, text = "4")
+            CalculatorButton(onClickedValue = { title = title + "5" }, text = "5")
+            CalculatorButton(onClickedValue = { title = title + "6" }, text = "6")
+            CalculatorButton(onClickedValue = { title = title + "*" }, text = "*")
+            CalculatorButton(onClickedValue = { title = title + "/" }, text = "/")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+            , horizontalArrangement = Arrangement.Center
+            , modifier = modifier.fillMaxWidth()
+        ) {
+            CalculatorButton(onClickedValue = { title = title + "7" }, text = "7")
+            CalculatorButton(onClickedValue = { title = title + "8" }, text = "8")
+            CalculatorButton(onClickedValue = { title = title + "9" }, text = "9")
+            CalculatorButton(onClickedValue = { title = title + "(" }, text = "(")
+            CalculatorButton(onClickedValue = { title = title + ")" }, text = ")")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+            , horizontalArrangement = Arrangement.Center
+            , modifier = modifier.fillMaxWidth()
+        ) {
+            CalculatorButton(onClickedValue = { title = title + "." }, text = ".")
+            CalculatorButton(onClickedValue = { title = title + "0" }, text = "0")
+            CalculatorButton(onClickedValue = { title = title.substring(0, title.length - 1) }, text = "<-")
+            CalculatorButton(onClickedValue = { title = "0" }, text = "C")
+            CalculatorButton(onClickedValue = {  }, text = "=")
+
         }
 
 
@@ -114,4 +158,16 @@ fun DisplayCalc(title: String, subtitle: String) {
 @Composable
 fun RightAlignedCardPreview() {
     Calculator()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DisplayCalcPreview(){
+    DisplayCalc("0", "o")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CalculatorButtonPreview(){
+    CalculatorButton({}, "0")
 }
