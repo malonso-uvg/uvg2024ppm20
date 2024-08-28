@@ -1,11 +1,10 @@
 package edu.uvg.a03_androidnavigation
 
-import android.content.Intent
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -13,28 +12,22 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -60,57 +53,22 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-    val context = LocalContext.current
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            DrawerContent(
-                onOptionSelected = { option ->
-                    when (option) {
-                        "Option 1" -> {
-                            val intent = Intent(context, Option1Activity::class.java)
-                            context.startActivity(intent)
-                        }
-                        // Agrega más opciones
-                    }
-                    scope.launch { drawerState.close() }
-                },
-                backgroundColor = Color(0xFF6200EE)
-            )
-        }
-    ) {
-        Scaffold(
-            topBar = {
-                TopBar(onMenuClicked = {
-                    scope.launch { drawerState.open() }
-                })
-            },
-            bottomBar = { BottomNavigationBar(navController = rememberNavController()) }
-        ) { innerPadding ->
-            NavigationHost(navController = rememberNavController(), Modifier.padding(innerPadding))
-        }
-    }
-}
-
-@Composable
-fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController, startDestination = "home", modifier = modifier) {
-        composable("home") { HomeScreen() }
-        composable("profile") { ProfileScreen() }
-        composable("about") { AboutScreen() }
+    val navController = rememberNavController()
+    Scaffold(
+        topBar = { TopBar() },
+        bottomBar = { BottomNavigationBar(navController) }
+    ) { innerPadding ->
+        NavigationHost(navController, Modifier.padding(innerPadding))
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(onMenuClicked: () -> Unit) {
+fun TopBar() {
     TopAppBar(
         title = { Text("My App", textAlign = TextAlign.Center) },
         navigationIcon = {
-            IconButton(onClick = { onMenuClicked() }) {
+            IconButton(onClick = { /* Acción del menú */ }) {
                 Icon(Icons.Default.Menu, contentDescription = "Menu")
             }
         },
@@ -120,26 +78,6 @@ fun TopBar(onMenuClicked: () -> Unit) {
             navigationIconContentColor = Color.White
         )
     )
-}
-
-@Composable
-fun DrawerContent(onOptionSelected: (Any?) -> Unit, backgroundColor: Color) {
-    Surface(
-        color = backgroundColor,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            TextButton(onClick = { onOptionSelected(null) }) {
-                Text("Opción 1", color = Color.White)
-            }
-            TextButton(onClick = { onOptionSelected(null) }) {
-                Text("Opción 2", color = Color.White)
-            }
-            TextButton(onClick = { onOptionSelected(null) }) {
-                Text("Opción 3", color = Color.White)
-            }
-        }
-    }
 }
 
 @Composable
@@ -176,6 +114,14 @@ fun BottomNavigationBar(navController: NavHostController) {
     }
 }
 
+@Composable
+fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier) {
+    NavHost(navController, startDestination = "home", modifier = modifier) {
+        composable("home") { HomeScreen() }
+        composable("profile") { ProfileScreen() }
+        composable("about") { AboutScreen() }
+    }
+}
 
 @Composable
 fun HomeScreen() {
