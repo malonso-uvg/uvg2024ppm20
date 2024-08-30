@@ -1,5 +1,6 @@
 package edu.uvg.navigationdrawer
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
@@ -27,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -39,6 +42,7 @@ import edu.uvg.navigationdrawer.screens.SettingsScreen
 import edu.uvg.navigationdrawer.ui.theme.NavigationDrawerTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+
 
 enum class MainRoute(value: String){
     Articles("articles")
@@ -59,6 +63,8 @@ private fun DrawerContent(
     menus: Array<DrawerMenu>
     , onMenuClick: (String) -> Unit
 ){
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -86,6 +92,17 @@ private fun DrawerContent(
                 }
             ) //End of NavigationDrawerItem
         }//End of menus loop
+        Spacer(modifier = Modifier.height(12.dp))
+        NavigationDrawerItem( //New activity
+            label = { Text("Nueva Activity") }
+            , icon = { Icon(Icons.Default.Create, contentDescription = null) }
+            , selected = false
+            , onClick = {
+                val intent = Intent(context, MainActivity2::class.java)
+                context.startActivity(intent)
+            }
+        ) //End of NavigationDrawerItem
+
 
     } //End of Column implementation
 }

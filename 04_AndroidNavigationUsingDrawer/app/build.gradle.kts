@@ -62,6 +62,9 @@ dependencies {
 
     // jetpack compose navigation
     implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
