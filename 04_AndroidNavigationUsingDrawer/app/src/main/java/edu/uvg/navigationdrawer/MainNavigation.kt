@@ -99,6 +99,7 @@ private fun DrawerContent(
             , selected = false
             , onClick = {
                 val intent = Intent(context, MainActivity2::class.java)
+                intent.putExtra("name", "Moises Alonso")
                 context.startActivity(intent)
             }
         ) //End of NavigationDrawerItem

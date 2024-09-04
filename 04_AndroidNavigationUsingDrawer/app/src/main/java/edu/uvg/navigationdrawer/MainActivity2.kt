@@ -10,15 +10,18 @@ import edu.uvg.navigationdrawer.ui.theme.NavigationDrawerTheme
 class MainActivity2 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var name: String? = "Android"
+        name = intent.getStringExtra("name")
+
         setContent{
             NavigationDrawerTheme {
-                HelloText()
+                HelloText(name)
             }
         }
     }
 }
 
 @Composable
-fun HelloText(){
-    Text(text = "Hello World")
+fun HelloText(name: String? = "Android"){
+    Text(text = "Hello " + name)
 }
