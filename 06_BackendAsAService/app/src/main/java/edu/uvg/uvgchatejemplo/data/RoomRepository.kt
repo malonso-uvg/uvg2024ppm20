@@ -1,4 +1,4 @@
-package eu.tutorials.chatroomapp.data
+package edu.uvg.uvgchatejemplo.data
 
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.uvg.uvgchatejemplo.data.Result

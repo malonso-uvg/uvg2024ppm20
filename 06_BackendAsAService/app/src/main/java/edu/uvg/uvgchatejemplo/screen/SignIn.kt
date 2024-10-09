@@ -1,5 +1,6 @@
 package edu.uvg.uvgchatejemplo.screen
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,16 +29,18 @@ import edu.uvg.uvgchatejemplo.data.Result
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    authViewModel: AuthViewModel
-    , onNavigateToSignUp: () -> Unit
-    , onSignInSuccess: () -> Unit
+    authViewModel: AuthViewModel,
+    onNavigateToSignUp: () -> Unit,
+    onSignInSuccess:()->Unit
 ) {
     var email by remember { mutableStateOf("") }
-    var password by remember {
-        mutableStateOf("")
-    }
+    var password by remember { mutableStateOf("") }
 
+    Log.d("step 1", "Before auth in the SignIn Screen")
     val result by authViewModel.authResult.observeAsState()
+    Log.d("step 2", "After auth in the SignIn Screen")
+    Log.d("result", result.toString())
+
     Column(
         modifier = Modifier
             .fillMaxSize()

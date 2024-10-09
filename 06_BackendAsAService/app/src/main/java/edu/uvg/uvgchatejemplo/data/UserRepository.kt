@@ -13,7 +13,9 @@ class UserRepository(private val auth: FirebaseAuth,
         try {
             auth.createUserWithEmailAndPassword(email, password).await()
             val user = User(firstName, lastName, email)
+            println("Before Save user in firestore")
             saveUserToFirestore(user)
+            println("After Save user in firestore")
             Result.Success(true)
         } catch (e: Exception) {
             Result.Error(e)
@@ -22,7 +24,9 @@ class UserRepository(private val auth: FirebaseAuth,
 
     suspend fun login(email: String, password: String): Result<Boolean> =
         try {
+            println("Before login")
             auth.signInWithEmailAndPassword(email, password).await()
+            println("After login")
             Result.Success(true)
         } catch (e: Exception) {
             Result.Error(e)

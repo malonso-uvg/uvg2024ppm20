@@ -1,4 +1,4 @@
-package eu.tutorials.chatroomapp.data
+package edu.uvg.uvgchatejemplo.data
 
 data class Room(
     val id: String = "",
