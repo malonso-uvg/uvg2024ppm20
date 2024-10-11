@@ -32,14 +32,29 @@ fun LoginScreen(
     authViewModel: AuthViewModel,
     onNavigateToSignUp: () -> Unit,
     onSignInSuccess:()->Unit
+
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var alreadyLoggedIn by remember { mutableStateOf(false) }
 
-    Log.d("step 1", "Before auth in the SignIn Screen")
     val result by authViewModel.authResult.observeAsState()
-    Log.d("step 2", "After auth in the SignIn Screen")
-    Log.d("result", result.toString())
+
+    if (!alreadyLoggedIn) {
+        when (result) {
+            is Result.Success->{
+                onSignInSuccess()
+                alreadyLoggedIn = true
+            }
+            is Result.Error ->{
+
+            }
+            else -> {
+
+            }
+        }
+    }
+
 
     Column(
         modifier = Modifier
@@ -67,20 +82,7 @@ fun LoginScreen(
         )
         Button(
             onClick = {
-
                 authViewModel.login(email, password)
-                when (result) {
-                    is Result.Success->{
-                        onSignInSuccess()
-                    }
-                    is Result.Error ->{
-
-                    }
-
-                    else -> {
-
-                    }
-                }
             },
             modifier = Modifier
                 .fillMaxWidth()
