@@ -36,15 +36,14 @@ fun LoginScreen(
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var alreadyLoggedIn by remember { mutableStateOf(false) }
 
     val result by authViewModel.authResult.observeAsState()
 
-    if (!alreadyLoggedIn) {
+    if (!authViewModel.alreadyLoggedIn.value) {
         when (result) {
             is Result.Success->{
                 onSignInSuccess()
-                alreadyLoggedIn = true
+                authViewModel.alreadyLoggedIn.value = true
             }
             is Result.Error ->{
 
