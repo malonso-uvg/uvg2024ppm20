@@ -70,4 +70,8 @@ dependencies {
 
     //Image loading
     implementation(libs.coil.compose)
+
+    // Add the dependencies for the App Check libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation(libs.com.google.firebase.firebase.appcheck.debug)
 }
